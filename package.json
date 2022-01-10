@@ -1,20 +1,34 @@
 {
-  "name": "giscus-component",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "name": "@giscus/react",
+  "private": false,
+  "description": "Type-safe React component for giscus",
+  "version": "1.0.1",
   "license": "MIT",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.es.js"
+    }
+  },
+  "sideEffects": false,
   "scripts": {
-    "commit": "cz",
-    "prepare": "husky install",
-    "build": "wsrun -t -r -m build",
-    "release": "yarn workspaces run semantic-release"
+    "dev": "vite",
+    "lint": "tsc",
+    "build": "run-p build:*",
+    "build:script": "vite build",
+    "build:types": "dts-bundle-generator --no-banner --external-imports=react -o dist/index.d.ts lib/index.ts",
+    "serve": "vite preview"
+  },
+  "peerDependencies": {
+    "react": "^16 || ^17 || ^18",
+    "react-dom": "^16 || ^17 || ^18",
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.4",
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/git": "^9.0.0",
+    "@types/react": "^17.0.0",
     "@types/node": "^16.0.0",
     "@types/vfile-message": "^2.0.0",
     "commitizen": "^4.2.4",
@@ -38,11 +52,28 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/giscus/giscus-component.git"
+    "url": "https://github.com/giscus/giscus-component.git",
+    "directory": "packages/react"
   },
-  "config": {
-    "commitizen": {
-      "path": "cz-emoji"
-    }
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "giscus",
+    "comment",
+    "comments",
+    "comment-system",
+    "react",
+    "github",
+    "component",
+    "discussions"
+  ],
+  "homepage": "https://github.com/giscus/giscus-component#readme",
+  "bugs": "https://github.com/giscus/giscus-component/issues",
+  "dependencies": {
+    "iframe-resizer-react": "^1.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
